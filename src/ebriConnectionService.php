@@ -15,7 +15,7 @@ class ebriConnectionService
         return Ping::check($host);
     }
 
-    public function download1($sourceUrl, $destinationPath, $timeout)
+    public function download($sourceUrl, $destinationPath, $timeout)
     {
         $ch = curl_init($sourceUrl);
         $fp = fopen($destinationPath, "wb");
@@ -41,11 +41,8 @@ class ebriConnectionService
         ];
     }
 
-    public function download($sourceUrl, $destinationPath, $bar, $timeout)
+    public function download1($sourceUrl, $destinationPath, $timeout)
     {
-        // Start the progress bar
-        $bar->start();
-
         $client = new Client(
             [
                 'verify' => env('CURL_VERIFY', true),
@@ -58,10 +55,6 @@ class ebriConnectionService
 
         if($response->getStatusCode() === 200)
         {
-            $bar->advance();
-            $bar->finish();
-            $bar = null;
-
             return [
                 'result' => true,
                 'statusBody' => $response->getBody(),

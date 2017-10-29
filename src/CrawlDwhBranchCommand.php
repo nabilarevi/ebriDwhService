@@ -90,13 +90,13 @@ class CrawlDwhBranchCommand extends Command
 
                         if($this->http_status != 200)
                         {
-                            $this->error(\Carbon\Carbon::now()."    | FAILED     | Status host DWH   : status($this->http_status) cant't connect to host : ".$this->config['hosts'][$retry]);
-                            fwrite($this->log, print_r(\Carbon\Carbon::now()."    | FAILED     | Status host DWH   : status($this->http_status) cant't connect to host : ".$this->config['hosts'][$retry]."\n", true));
+                            $this->error(\Carbon\Carbon::now()." | FAILED     | Status host DWH   : status($this->http_status) cant't connect to host : ".$this->config['hosts'][$retry]);
+                            fwrite($this->log, print_r(\Carbon\Carbon::now()." | FAILED     | Status host DWH   : status($this->http_status) cant't connect to host : ".$this->config['hosts'][$retry]."\n", true));
                         }
                         else
                         {
-                            $this->info(\Carbon\Carbon::now()."    | SUCCESS    | Status host DWH   : ".$this->config['hosts'][$retry]." status( ".$this->http_status."(√) )");
-                            fwrite($this->log, print_r(\Carbon\Carbon::now()."    | SUCCESS    | Status host DWH   : ".$this->config['hosts'][$retry]." status( ".$this->http_status."(√) )\n", true));
+                            $this->info(\Carbon\Carbon::now()." | SUCCESS    | Status host DWH   : ".$this->config['hosts'][$retry]." status( ".$this->http_status."(√) )");
+                            fwrite($this->log, print_r(\Carbon\Carbon::now()." | SUCCESS    | Status host DWH   : ".$this->config['hosts'][$retry]." status( ".$this->http_status."(√) )\n", true));
                         }
 
                         $this->host = $this->config['hosts'][$retry];
@@ -113,13 +113,12 @@ class CrawlDwhBranchCommand extends Command
                 $try = 0;
                 while ($try !=20 && $this->fileResult == false)
                 {
-                    $this->info(\Carbon\Carbon::now()."    | INFO       | Dowloading DWH Branch : ".$this->host);
-                    fwrite($this->log, print_r(\Carbon\Carbon::now()."    | INFO       | Dowloading DWH Branch : ".$this->host."\n", true));
+                    $this->info(\Carbon\Carbon::now()." | INFO       | Dowloading DWH Branch : ".$this->host);
+                    fwrite($this->log, print_r(\Carbon\Carbon::now()." | INFO       | Dowloading DWH Branch : ".$this->host."\n", true));
 
                     $bar = $this->connection->barSetup($this->output->createProgressBar(1));
 
-                    $connection = $this->connection->download($sourceUrl = 'http://andriyanto.co/dwh_branch.xml', $destFilename, $bar, 300);
-
+                    $connection = $this->connection->download($sourceUrl, $destFilename, $bar, 300);
 
                     $this->http_status_download = $connection['StatusCode'];
                     $this->fileResult = $connection['result'];
