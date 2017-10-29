@@ -1,0 +1,21 @@
+{
+    "name": "andriyanto/ebridwhservice",
+    "description": "Job auto sync BRI Report Server (Portal Data Warehouse) PT. Bank Rakyat Indonesia",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "andriyanto",
+            "email": "andriynto.dev@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Andriyanto\\ebriDwhService\\": "packages/Andriyanto/ebriDwhService/src",
+            "ebriDwhService\\Eloquent\\": "packages/Andriyanto/ebriDwhService/src/models",
+            "ebriDwhService\\Helpers\\": "packages/Andriyanto/ebriDwhService/src/helpers"
+        }
+    }
+}
